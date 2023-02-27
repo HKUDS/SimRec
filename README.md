@@ -42,7 +42,7 @@ We utilize three datasets for evaluating SimRec: <i>Yelp, Gowalla, </i>and <i>Am
 |Amazon |$76,469$|$83,761$|$966,680$|$1.5\times 10^{-4}$|
 
 ## Usage
-Please unzip the datasets first. Also you need to create the `History/` and the `Models/` directories. The command lines to train SimRec using our pre-trained teachers on thre three datasets are as below. The un-specified hyperparameters in the commands are set as default. If you wish to train another teacher, you may use `pretrainTeacher.py` for convienience.
+Please unzip the datasets first. Also you need to create the `History/` and the `Models/` directories. Switch the working directory to `methods/SimRec/`. The command lines to train SimRec using our pre-trained teachers on thre three datasets are as below. The un-specified hyperparameters in the commands are set as default. If you wish to train another teacher, you may use `pretrainTeacher.py` for convienience.
 
 * Yelp
 ```
