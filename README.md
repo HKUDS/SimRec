@@ -2,12 +2,12 @@
 
 This is the pyTorch-based implementation for SimRec model proposed in this paper:
 
->Lianghao Xia, Chao Huang, Yong Xu and Jiao Shi. <i>Graph-less Collaborative Filtering</i>. In WWW'23, Austin, US, April 30 - May 4, 2023.
+><a href='github.com/akaxlh'>Lianghao Xia</a>, Chao Huang, Yong Xu and Jiao Shi. <i>Graph-less Collaborative Filtering</i>. In WWW'23, Austin, US, April 30 - May 4, 2023.
 
 ## Introduction
 Though Graph Neural Networks (GNNs) have provided state-of-the-art network architectures for collaborative filtering, the accuracy and extensibility of existing GNN-based methods are limited by the noise-amplifying over-smoothing effect and the time-consuming iterative graph encoding process. Three experiments below illustrate these limitations of existing models and present the superiority of the proposed SimRec <i>w.r.t.</i> these issues. <i>Firstly</i>, recent GNN-based CF models generally advance in recommendation accuracy while sacrificing model efficiency as in (a). However, our SimRec achieves accurate recommendation while keeping low computation costs in inference. <i>Secondly</i>, GNN models are prone to produce over-smoothed embeddings for false neighbors like in (b), while the proposed SimRec is less-affected by such noisy edges and still produces unlike embeddings to capture their respective characteristics. <i>Additionally</i>, compared to recent SSL-enhanced models, SimRec is evaluated to better distribute the user embeddings in a more uniform manner.
 
-<img src='figs/intro.png' />
+<img src='figs/intro.png' width=90%/>
 
 To address the above limitations, we propose to leverage the power of knowledge distillation, to distill the knowledge learned by the advanced but heavy GNN teacher to a light-weight MLP student, by doing which the time complexity of model inference is reduced and the hard graph aggregation causing over-smoothing is avoided. Specifically, we adopt a bi-level distillation approach, containing the prediction-level distillation aligning the predictions for user-item relations, and the embedding-level distillation which aligns the learned embeddings using contrastive learning. A contrastive regularization term is added into the optimization objective, to learn more-uniform representations. The overall model architecture is depicted as follows:
 
@@ -15,7 +15,7 @@ To address the above limitations, we propose to leverage the power of knowledge 
 
 ## Citation
 ```
-@inproceedings{graphless2022,
+@inproceedings{graphless2023,
   author    = {Xia, Lianghao and
                Huang, Chao and
                Xu, Yong and
@@ -28,8 +28,6 @@ To address the above limitations, we propose to leverage the power of knowledge 
 
 ## Environment
 The implementation for SimRec is under the following development environment:
-
-pyTorch:
 * python=3.10.4
 * torch=1.11.0
 * numpy=1.22.3
@@ -37,6 +35,11 @@ pyTorch:
 
 ## Datasets
 We utilize three datasets for evaluating SimRec: <i>Yelp, Gowalla, </i>and <i>Amazon</i>. Note that compared to the data used in our previous works, in this work we utilize a more sparse version of the three datasets, to increase the difficulty of recommendation task. Our evaluation follows the common implicit feedback paradigm. The datasets are divided into training set, validation set and test set by 70:5:25.
+| Dataset | \# Users | \# Items | \# Interactions | Interaction Density |
+|:-------:|:--------:|:--------:|:---------------:|:-------:|
+|Yelp   |$42,712$|$26,822$|$182,357$|$1.6\times 10^{-4}$|
+|Gowalla|$25,557$|$19,747$|$294,983$|$5.9\times 10^{-4}$|
+|Amazon |$76,469$|$83,761$|$966,680$|$1.5\times 10^{-4}$|
 
 ## Usage
 Please unzip the datasets first. Also you need to create the `History/` and the `Models/` directories. The command lines to train SimRec using our pre-trained teachers on thre three datasets are as below. The un-specified hyperparameters in the commands are set as default. If you wish to train another teacher, you may use `pretrainTeacher.py` for convienience.
@@ -56,10 +59,12 @@ python Main.py --data amazon --reg 1e-7 --soft 1 --cd 1e-1 --sc 1
 
 ### Important Arguments
 * `reg`: It is the weight for weight-decay regularization. We tune this hyperparameter from the set `{1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8}`.
-* `softreg`: This is the weight for the prediction-level distillation.
-* `cdreg`: This parameter denotes the weight for the embedding-level distillation.
-* `screg`: This is the weight for the contrastive regularization.
-* `tempsoft`: The temperature for the prediction-level distillation.
-* `tempcd`: The temperature for the embedding-level distillation.
-* `tempsc`: The temperature for the contrastive regularization.
+* Regularization weights. Recommended values are `{10, 3, 1, 3e-1, 1e-1, 3e-2, 1e-2, 3e-3, 1e-3}`.
+  * `softreg`: This is the weight for the prediction-level distillation.
+  * `cdreg`: This parameter denotes the weight for the embedding-level distillation.
+  * `screg`: This is the weight for the contrastive regularization.
+* Temperatures for the regularizations. Recommended values are `{3, 1, 3e-1, 1e-1, 3e-2, 1e-2}`.
+  * `tempsoft`: The temperature for the prediction-level distillation.
+  * `tempcd`: The temperature for the embedding-level distillation.
+  * `tempsc`: The temperature for the contrastive regularization.
 * `teacher_model`: This is a string refering the saved teacher model. If this value is `None`, then the default teacher is loaded.
