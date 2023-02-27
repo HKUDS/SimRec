@@ -1,6 +1,6 @@
 # Graph-less Collaborative Filtering
 
-This is the pyTorch-based implementation by <a href='github.com/akaxlh'>@akaxlh</a> for SimRec model proposed in this paper:
+This is the pyTorch-based implementation by <a href='https://github.com/akaxlh'>@akaxlh</a> for SimRec model proposed in this paper:
 
 ><a href='https://akaxlh.github.io/'>Lianghao Xia</a>, <a href='https://sites.google.com/view/chaoh'>Chao Huang</a>, Yong Xu and Jiao Shi. <i>Graph-less Collaborative Filtering</i>. In WWW'23, Austin, US, April 30 - May 4, 2023.
 
