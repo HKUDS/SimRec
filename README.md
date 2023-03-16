@@ -2,7 +2,7 @@
 
 This is the pyTorch-based implementation by <a href='https://github.com/akaxlh'>@akaxlh</a> for SimRec model proposed in this paper:
 
-><a href='https://akaxlh.github.io/'>Lianghao Xia</a>, <a href='https://sites.google.com/view/chaoh'>Chao Huang</a>, Yong Xu and Jiao Shi. <i>Graph-less Collaborative Filtering</i>. In WWW'23, Austin, US, April 30 - May 4, 2023.
+><a href='https://akaxlh.github.io/'>Lianghao Xia</a>, <a href='https://sites.google.com/view/chaoh'>Chao Huang</a>, Yong Xu and Jiao Shi. <i>Graph-less Collaborative Filtering</i>. <a href='https://arxiv.org/abs/2303.08537'>Paper in arXiv</a>. In WWW'23, Austin, US, April 30 - May 4, 2023.
 
 ## Introduction
 Though Graph Neural Networks (GNNs) have provided state-of-the-art network architectures for collaborative filtering, the accuracy and extensibility of existing GNN-based methods are limited by the noise-amplifying over-smoothing effect and the time-consuming iterative graph encoding process. Three experiments below illustrate these limitations of existing models and present the superiority of the proposed SimRec <i>w.r.t.</i> these issues. <i>Firstly</i>, recent GNN-based CF models generally advance in recommendation accuracy while sacrificing model efficiency as in (a). However, our SimRec achieves accurate recommendation while keeping low computation costs in inference. <i>Secondly</i>, GNN models are prone to produce over-smoothed embeddings for false neighbors like in (b), while the proposed SimRec is less-affected by such noisy edges and still produces unlike embeddings to capture their respective characteristics. <i>Additionally</i>, compared to recent SSL-enhanced models, SimRec is evaluated to better distribute the user embeddings in a more uniform manner.
