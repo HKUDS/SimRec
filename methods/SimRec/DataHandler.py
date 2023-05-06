@@ -18,6 +18,14 @@ class DataHandler:
 			predir = '../../Datasets/sparse_gowalla/'
 			if args.teacher_model is None:
 				args.teacher_model = 'lightgcn_gowalla'
+		elif args.data == 'movie':
+			predir = '../../Datasets/sparse_movie/'
+			if args.teacher_model is None:
+				args.teacher_model = 'lightgcn_movie'
+		elif args.data == 'food':
+			predir = '../../Datasets/sparse_food/'
+			if args.teacher_model is None:
+				args.teacher_model = 'lightgcn_food'
 		elif args.data == 'amazon':
 			predir = '../../Datasets/sparse_amazon/'
 			if args.teacher_model is None:
